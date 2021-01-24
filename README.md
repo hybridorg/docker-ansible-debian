@@ -4,8 +4,8 @@
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`latest`, `11` (*11/Dockerfile*)](https://github.com/hybridadmin/docker-debian-ansible/tree/main/11/Dockerfile)
-- [`10` (*10/Dockerfile*)](https://github.com/hybridadmin/docker-debian-ansible/tree/main/10/Dockerfile)
+- [`latest`, `11`](https://github.com/hybridadmin/docker-debian-ansible/tree/main/11/Dockerfile)
+- [`10`](https://github.com/hybridadmin/docker-debian-ansible/tree/main/10/Dockerfile)
 
 ## How to Build the image
 
