@@ -33,13 +33,13 @@ docker pull hybridadmin/ansible-debian:latest
 
 Run a container using the image with the following command:
 ```console
-docker run -d --name systemd-debian --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro hybridadmin/ansible-debian:latest
+docker run -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro hybridadmin/ansible-debian:latest
 ```
 
 Use Ansible inside the container:
 ```console
 docker exec --tty [container_id] env TERM=xterm ansible --version
-docker exec --tty [container_id] env TERM=xterm ansible-playbook /path/to/ansible/playbook.yml --syntax-check
+docker exec --tty [container_id] env TERM=xterm ansible-playbook /path/to/playbook.yml --syntax-check
 ```
 
 Connect to the container:
