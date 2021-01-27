@@ -1,4 +1,5 @@
 # Debian Docker Images with ansible and systemd
+![Build](https://github.com/hybridadmin/docker-ansible-debian/workflows/Build/badge.svg?branch=main)
 
 > Debian Docker images to be used for testing ansible playbooks and roles.
 
