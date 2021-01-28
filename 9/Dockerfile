@@ -28,6 +28,9 @@ RUN apt-get update \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
 
+# ansible python interpreter fix
+RUN ln -s /usr/local/bin/python3 /usr/bin/python3
+
 # Upgrade pip to latest version
 RUN python3.8 -m pip install --upgrade pip
 
