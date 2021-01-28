@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:stretch
 LABEL maintainer="Tinashe Chikomo <tinashe@chikomo.net>"
 
 ENV container docker
@@ -10,15 +10,29 @@ ENV pip_packages "ansible cryptography"
 # Install dependencies.
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
+    apt-utils sudo make gcc openssl zlib1g-dev wget ca-certificates libffi-dev libssl-dev
+
+RUN wget -q https://www.python.org/ftp/python/3.8.2/Python-3.8.2.tgz -O /tmp/Python-3.8.2.tgz && \
+    tar -xzf /tmp/Python-3.8.2.tgz -C /tmp && \
+    cd /tmp/Python-3.8.2 && \
+    ./configure && \
+    make && make install \
+    && rm -rf /tmp/Python-3.8*
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
        sudo systemd systemd-sysv \
-       wget libffi-dev libssl-dev \
-       python3-pip python3-dev python3-setuptools python3-wheel \
+#       build-essential wget libffi-dev libssl-dev \
+#       python3-pip python3-dev python3-setuptools python3-wheel \
     && rm -rf /var/lib/apt/lists/* \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
 
+# Upgrade pip to latest version
+RUN python3.8 -m pip install --upgrade pip
+
 # Install Ansible via pip.
-RUN python3 -m pip install $pip_packages
+RUN python3.8 -m pip install $pip_packages
 
 # Install Ansible inventory file.
 RUN mkdir -p /etc/ansible
