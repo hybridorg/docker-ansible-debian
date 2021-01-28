@@ -21,15 +21,13 @@ RUN wget -q https://www.python.org/ftp/python/3.8.2/Python-3.8.2.tgz -O /tmp/Pyt
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-       sudo systemd systemd-sysv \
-#       build-essential wget libffi-dev libssl-dev \
-#       python3-pip python3-dev python3-setuptools python3-wheel \
+       sudo systemd systemd-sysv python3-apt \
     && rm -rf /var/lib/apt/lists/* \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
 
 # ansible python interpreter fix
-RUN ln -s /usr/local/bin/python3 /usr/bin/python3
+# RUN ln -s /usr/local/bin/python3 /usr/bin/python3
 
 # Upgrade pip to latest version
 RUN python3.8 -m pip install --upgrade pip
