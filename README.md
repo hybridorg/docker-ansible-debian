@@ -15,6 +15,7 @@
 
 - [`latest`, `11`](https://github.com/hybridadmin/docker-ansible-debian/tree/main/11/Dockerfile)
 - [`10`](https://github.com/hybridadmin/docker-ansible-debian/tree/main/10/Dockerfile)
+- [`9`](https://github.com/hybridadmin/docker-ansible-debian/tree/main/9/Dockerfile)
 
 ## How to Build the image
 
