@@ -18,6 +18,7 @@ RUN apt-get update \
     && apt-get clean
 
 # Install Ansible via pip.
+RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install $pip_packages
 
 # Install Ansible inventory file.
