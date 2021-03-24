@@ -5,7 +5,7 @@ ENV container docker
 ENV LC_ALL C
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV pip_packages "ansible cryptography"
+ENV pip_packages "ansible pymysql cryptography"
 
 # Install dependencies.
 RUN apt-get update \
@@ -26,9 +26,6 @@ RUN apt-get update \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
 
-# ansible python interpreter fix
-# RUN ln -s /usr/local/bin/python3 /usr/bin/python3
-
 # Upgrade pip to latest version
 RUN python3.8 -m pip install --upgrade pip
 
@@ -37,7 +34,8 @@ RUN python3.8 -m pip install $pip_packages
 
 # Install Ansible inventory file.
 RUN mkdir -p /etc/ansible
-RUN echo -e "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
+ADD https://raw.githubusercontent.com/hybridadmin/misc-scripts/master/linux/ansible/hosts /etc/ansible/hosts
+ADD https://raw.githubusercontent.com/hybridadmin/misc-scripts/master/linux/ansible/ansible.cfg etc/ansible/ansible.cfg
 
 RUN rm -f /lib/systemd/system/multi-user.target.wants/* \
     /etc/systemd/system/*.wants/* \
