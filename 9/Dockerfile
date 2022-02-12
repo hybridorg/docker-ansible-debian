@@ -5,7 +5,7 @@ ENV container docker
 ENV LC_ALL C
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV pip_packages "ansible pymysql cryptography"
+ENV pip_packages "ansible pymysql cryptography yamllint ansible-lint"
 
 # Install dependencies.
 RUN apt-get update \
