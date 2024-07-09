@@ -2,7 +2,7 @@ FROM debian:bullseye
 LABEL maintainer="Tinashe Chikomo <tinashe@chikomo.net>"
 
 ENV container docker
-ENV LC_ALL C
+#ENV LC_ALL C
 ENV DEBIAN_FRONTEND noninteractive
 
 ENV pip_packages "ansible pymysql cryptography yamllint ansible-lint"
@@ -11,29 +11,28 @@ ENV pip_packages "ansible pymysql cryptography yamllint ansible-lint"
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
        sudo systemd systemd-sysv \
-       wget libffi-dev libssl-dev \
-       python3-pip python3-dev python3-setuptools python3-wheel \
+       build-essential wget libffi-dev libssl-dev procps \
+       python3-pip python3-dev python3-setuptools python3-wheel python3-apt \
+       iproute2 \
     && rm -rf /var/lib/apt/lists/* \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
 
+# Upgrade pip to latest version.
+RUN pip3 install --upgrade pip
+
 # Install Ansible via pip.
-RUN python3 -m pip install --upgrade pip
-RUN python3 -m pip install $pip_packages
+RUN pip3 install $pip_packages
+
+COPY initctl_faker .
+RUN chmod +x initctl_faker && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl
 
 # Install Ansible inventory file.
 RUN mkdir -p /etc/ansible
-ADD https://raw.githubusercontent.com/hybridadmin/misc-scripts/master/linux/ansible/hosts /etc/ansible/hosts
-ADD https://raw.githubusercontent.com/hybridadmin/misc-scripts/master/linux/ansible/ansible.cfg etc/ansible/ansible.cfg
+RUN echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
 
-RUN rm -f /lib/systemd/system/multi-user.target.wants/* \
-    /etc/systemd/system/*.wants/* \
-    /lib/systemd/system/local-fs.target.wants/* \
-    /lib/systemd/system/sockets.target.wants/*udev* \
-    /lib/systemd/system/sockets.target.wants/*initctl* \
-    /lib/systemd/system/sysinit.target.wants/systemd-tmpfiles-setup* \
-    /lib/systemd/system/systemd-update-utmp*
+# Make sure systemd doesn't start agettys on tty[1-6].
+RUN rm -f /lib/systemd/system/multi-user.target.wants/getty.target
 
-VOLUME [ "/sys/fs/cgroup" ]
-
+VOLUME ["/sys/fs/cgroup"]
 CMD ["/lib/systemd/systemd"]

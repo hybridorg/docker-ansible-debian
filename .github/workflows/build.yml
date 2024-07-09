@@ -15,10 +15,6 @@ jobs:
       matrix:
         distribution:
           - image: debian
-            version: "9"
-            tags: "9"
-            platform: "linux/amd64"
-          - image: debian
             version: "10"
             tags: "10"
             platform: "linux/amd64"
