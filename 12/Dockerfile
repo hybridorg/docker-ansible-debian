@@ -13,8 +13,9 @@ RUN apt-get update \
        sudo systemd systemd-sysv \
        build-essential wget libffi-dev libssl-dev procps \
        python3-pip python3-dev python3-setuptools python3-wheel python3-apt \
-       iproute2 \
-    && pip install uv==0.5.5 \
+       iproute2 curl \
+#    && pip3 install uv==0.5.5 \
+    && curl -LsSf https://astral.sh/uv/install.sh | sh \
     && rm -rf /var/lib/apt/lists/* \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
@@ -23,7 +24,7 @@ RUN apt-get update \
 # RUN pip3 install --upgrade pip
 
 # Install Ansible via pip.
-RUN uv pip install --system $pip_packages
+RUN uv venv &&  uv pip install --system $pip_packages
 
 COPY initctl_faker .
 RUN chmod +x initctl_faker && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl
