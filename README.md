@@ -13,7 +13,8 @@
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`latest`, `11`](https://github.com/hybridadmin/docker-ansible-debian/tree/main/11/Dockerfile)
+- [`latest`, `12`](https://github.com/hybridadmin/docker-ansible-debian/tree/main/12/Dockerfile)
+- [`11`](https://github.com/hybridadmin/docker-ansible-debian/tree/main/11/Dockerfile)
 - [`10`](https://github.com/hybridadmin/docker-ansible-debian/tree/main/10/Dockerfile)
 - [`9`](https://github.com/hybridadmin/docker-ansible-debian/tree/main/9/Dockerfile)
 
@@ -37,7 +38,7 @@ docker pull hybridadmin/ansible-debian:latest
 Run a container using the image with the following command:
 
 ```console
-docker run -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro hybridadmin/ansible-debian:latest
+docker run -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:rw --cgroupns=host hybridadmin/ansible-debian:latest
 ```
 
 Use ansible inside the container:
