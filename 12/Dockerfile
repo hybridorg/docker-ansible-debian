@@ -23,7 +23,8 @@ RUN apt-get update \
 WORKDIR /root
 
 # Install Ansible via pip. - source /root/.bashrc &&
-RUN uv venv &&  uv pip install $pip_packages
+RUN pip3 install --break-system-packages $pip_packages
+#uv venv &&  uv pip install $pip_packages
 
 COPY initctl_faker .
 RUN chmod +x initctl_faker && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl
