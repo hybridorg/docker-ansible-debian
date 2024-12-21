@@ -35,7 +35,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Inspec
-        run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec -v 4.24.8
+        run: |
+          curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec -v 5.22.50
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -67,7 +68,7 @@ jobs:
             --cgroupns=host \
             -v /sys/fs/cgroup:/sys/fs/cgroup:rw \
             hybridadmin/ansible-${{ matrix.distribution.image }}:${{ matrix.distribution.version }} > "${container_id}"
-          inspec exec tests/inspec --chef-license accept-silent -t docker://$(cat ${container_id})
+          inspec exec tests/inspec --chef-license accept-silent --log-level debug -t docker://$(cat ${container_id})
 
       - name: Build/Push Docker to DockerHub
         run: |
