@@ -13,7 +13,8 @@
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`latest`, `12`](https://github.com/hybridadmin/docker-ansible-debian/tree/main/12/Dockerfile)
+- [`latest`, `13`](https://github.com/hybridadmin/docker-ansible-debian/tree/main/13/Dockerfile)
+- [`12`](https://github.com/hybridadmin/docker-ansible-debian/tree/main/12/Dockerfile)
 - [`11`](https://github.com/hybridadmin/docker-ansible-debian/tree/main/11/Dockerfile)
 - [`10`](https://github.com/hybridadmin/docker-ansible-debian/tree/main/10/Dockerfile)
 - [`9`](https://github.com/hybridadmin/docker-ansible-debian/tree/main/9/Dockerfile)
