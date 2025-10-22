@@ -26,6 +26,6 @@ jobs:
     with:
       distro_image: '${{ matrix.distro.image }}'
       distro_tags: '${{ matrix.distro.tags }}'
-      distro_platform: '{{ matrix.distro.platform }}'
-      distro_version: '{{ matrix.distro.version }}'
+      distro_platform: '${{ matrix.distro.platform }}'
+      distro_version: '${{ matrix.distro.version }}'
       repo_name: 'hybridadmin/ansible-debian'
