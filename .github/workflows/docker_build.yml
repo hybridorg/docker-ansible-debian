@@ -1,5 +1,7 @@
 name: build_push
+
 on: [push]
+
 jobs:
   run_molecule_tests:
     strategy:
