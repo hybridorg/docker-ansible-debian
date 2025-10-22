@@ -35,3 +35,4 @@ jobs:
       distro_platform: '${{ matrix.distro.platform }}'
       distro_version: '${{ matrix.distro.version }}'
       repo_name: 'hybridadmin/ansible-debian'
+      readme_only: true
