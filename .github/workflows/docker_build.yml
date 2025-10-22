@@ -1,0 +1,29 @@
+name: build_push
+on: [push]
+jobs:
+  run_molecule_tests:
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        distribution:
+          - image: debian
+            version: "11"
+            platform: "linux/amd64,linux/arm64"
+            tags: "11"
+          - image: debian
+            version: "12"
+            platform: "linux/amd64,linux/arm64"
+            tags: "12"
+          - image: debian
+            version: "13"
+            platform: "linux/amd64,linux/arm64"
+            tags: "13,latest"
+    uses: hybridorg/reuse-workflows/.github/workflows/build_push.yml@main
+    secrets: inherit
+    with:
+      distro_image: ${{ matrix.distro.image }}
+      distro_tags: ${{ matrix.distro.tags }}
+      distro_platform: {{ matrix.distro.platform }}
+      distro_version: {{ matrix.distro.version }}
+      repo_name: 'hybridadmin/ansible-debian'
