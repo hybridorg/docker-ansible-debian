@@ -2,10 +2,11 @@ name: build_push
 
 on: [push]
 
-permissions:
-  contents: read # This is required for actions/checkout
-  packages: write # This is required to push images to Github packages
-  id-token: write # This is required for requesting the JWT
+#permissions:
+#  contents: read # This is required for actions/checkout
+#  packages: write # This is required to push images to Github packages
+#  id-token: write # This is required for requesting the JWT
+#
 
 jobs:
   run_molecule_test:
