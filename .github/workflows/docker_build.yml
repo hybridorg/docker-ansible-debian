@@ -2,8 +2,6 @@ name: build_push
 
 on: [push]
 
-###
-
 jobs:
   run_molecule_test:
     strategy:
@@ -30,5 +28,11 @@ jobs:
       distro_tags: '${{ matrix.distro.tags }}'
       distro_platform: '${{ matrix.distro.platform }}'
       distro_version: '${{ matrix.distro.version }}'
+
+  run_update_readme:
+    needs:
+      - run_molecule_test
+    uses: hybridorg/reuse-workflows/.github/workflows/update_readme.yml@main
+    secrets: inherit
+    with:
       repo_name: 'hybridadmin/ansible-debian'
-      readme_only: true
