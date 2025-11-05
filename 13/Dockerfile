@@ -23,7 +23,8 @@ RUN apt-get update \
 WORKDIR /root
 
 # Install Ansible via pip. - source /root/.bashrc &&
-RUN pip3 install --break-system-packages $pip_packages
+RUN pip3 install --break-system-packages $pip_packages \
+   && ansible-galaxy collection install community.general
 #uv venv &&  uv pip install $pip_packages
 
 COPY initctl_faker .
