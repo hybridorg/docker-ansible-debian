@@ -23,7 +23,7 @@ RUN pip3 install --upgrade pip
 
 # Install Ansible via pip.
 RUN pip3 install $pip_packages \
-   && ansible-galaxy collection install community.general
+   && ansible-galaxy collection install community.general -p /usr/share/ansible/roles
 
 COPY initctl_faker .
 RUN chmod +x initctl_faker && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl
