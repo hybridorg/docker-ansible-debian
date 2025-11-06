@@ -24,7 +24,7 @@ WORKDIR /root
 
 # Install Ansible via pip. - source /root/.bashrc &&
 RUN pip3 install --break-system-packages $pip_packages \
-   && ansible-galaxy collection install community.general -p /usr/share/ansible/roles
+   && ansible-galaxy collection install community.general -p /root/.ansible/collections/ansible_collections --force
 #uv venv &&  uv pip install $pip_packages
 
 COPY initctl_faker .
